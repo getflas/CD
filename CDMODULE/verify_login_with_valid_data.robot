@@ -1,8 +1,10 @@
 *** Settings ***
 Library           Selenium2Library    WITH NAME    se
+Library           Collections
 
 *** Variables ***
-@{packages}       robotframework-selenium2library
+@{packages}       robotframework-selenium2library    Collections
+@{stp_server}     os=ubuntu    version=14.04    ip=
 
 *** Test Cases ***
 verify_login_with_valid_data
@@ -13,11 +15,9 @@ verify_login_with_valid_data
     Call Method    ${chrome_options}    add_argument    disable-dev-shm-usage
     Call Method    ${chrome_options}    add_argument    no-sandbox
     ${options}=    Call Method    ${chrome_options}    to_capabilities
-    Open Browser    http://111.93.7.182    Chrome    desired_capabilities=${options}
+    Open Browser    http://${stp_server.ip}    Chrome    desired_capabilities=${options}
     Wait Until Page Contains Element    xpath=//input[@id='emailid']    50
+    Input Text    xpath=//input[@id='emailid']    test
     Wait Until Page Contains Element    xpath=//input[@id='pwd']    50
-    Wait Until Page Contains Element    xpath=//button[@class='btn btn-purple btn-block text-uppercase waves-effect waves-light']    50
-    Maximize Browser Window
-    Wait Until Page Contains    Remember me    50
-    Wait Until Page Contains    Forgot your password    50
+    Input Text    xpath=//input[@id='pwd']    test
     Close Browser
