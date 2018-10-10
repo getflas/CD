@@ -3,6 +3,8 @@ Library           Selenium2Library    WITH NAME    se
 
 *** Variables ***
 @{packages}       robotframework-selenium2library
+&{stp_server}     os=ubuntu    version=14.04    ip=
+@{softwares}      python-pip
 
 *** Test Cases ***
 verify_location_with_lessthan_3_characters
